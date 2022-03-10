@@ -1,6 +1,9 @@
 package lambdasinaction._01lambda.basic1;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
 
 public class FilteringApples {
 
@@ -11,7 +14,26 @@ public class FilteringApples {
 						new Apple(155, "green"),
 						new Apple(120, "red"));
 
-		//filter method 호출
+		//filter method 호출 - 익명클래스
+		filter(inventory, new ApplePredicate() {
+			@Override
+			public boolean test(Apple a) {
+				return a.getColor().equals("green");
+			}
+		}).forEach(new Consumer<Apple>() { // list를 forEach로 바로 출력
+			@Override
+			public void accept(Apple apple) {
+				System.out.println("apple = " + apple);
+			}
+		});
+
+		// filter method 호출 - 람다식
+		filter(inventory, apple -> apple.getColor().equals("red"))
+				.forEach(apple -> System.out.println("apple = " + apple));
+
+		System.out.println("----------------------------------------------");
+		filter(inventory, apple -> (apple.getColor().equals("green")) && (apple.getWeight() > 150))
+				.forEach(System.out::println);
 
 	}
 
@@ -55,8 +77,10 @@ public class FilteringApples {
 		return result;
 	}
 
+	@FunctionalInterface
 	interface ApplePredicate {
 		public boolean test(Apple a);
+		// void test(); // error FunctionalInterface는 추상메서드를 하나만 선언 할 수 있음
 	}
 
 	static class AppleWeightPredicate implements ApplePredicate {
