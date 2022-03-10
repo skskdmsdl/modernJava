@@ -20,17 +20,24 @@ public class ConsumerDemo {
 		inventory.add(new Apple(200,"green"));
 		inventory.add(new Apple(200,"red"));
 		inventory.add(new Apple(150,"red"));
-		
-		//1. using anonymous inner class
-		
-		
-		
-		//2. lambda expression
 
-		
-		
-		//3. Method Reference
-		
+        System.out.println("---- anonymous inner class");
+		//1. using anonymous inner class
+        printAppleInfo(inventory, new Consumer<Apple>() {
+            @Override
+            public void accept(Apple apple) {
+                System.out.println("apple = " + apple);
+            }
+        });
+        inventory.forEach(apple -> apple.setWeight(apple.getWeight() + 10));
+
+        System.out.println("---- lambda expression");
+        //2. lambda expression
+        printAppleInfo(inventory, apple -> System.out.println("apple = " + apple));
+
+        System.out.println("---- method reference");
+        //3. Method Reference
+		printAppleInfo(inventory, System.out::println);
 	}
 	
     public static class Apple {
