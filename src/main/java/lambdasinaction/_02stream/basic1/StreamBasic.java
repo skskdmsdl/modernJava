@@ -3,6 +3,7 @@ package lambdasinaction._02stream.basic1;
 import java.util.*;
 
 import static java.util.Comparator.comparing;
+import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
@@ -16,14 +17,22 @@ public class StreamBasic {
 
         // Java 8
         getLowCaloricDishesNamesInJava8(Dish.menu).forEach(System.out::println);
+
         System.out.println("---- Method Reference");
         getLowCaloricDishesNamesInJava8MethodRef(Dish.menu).forEach(System.out::println);
+
         System.out.println("---- Vegetarian");
         getVegetarianDishesName(Dish.menu).forEach(System.out::println);
+
         System.out.println("---- GroupingBy");
         //getGroupingMenu(Dish.menu); + (ctrl + alt + v)
         Map<String, List<Dish>> groupingMenu = getGroupingMenu(Dish.menu);
         System.out.println("groupingMenu = " + groupingMenu);
+
+        System.out.println("---- MaxCalorieDish");
+        Dish maxCalorieDish = getMaxCalorieDish(Dish.menu);
+        System.out.println("maxCalorieDish = " + maxCalorieDish);
+
     }
 
     public static List<String> getLowCaloricDishesNamesInJava7(List<Dish> dishes){
@@ -105,7 +114,7 @@ public class StreamBasic {
     }
 
     // 400칼로리 이하인 메뉴를 다이어트로, 아닐 경우 일반으로 그룹핑해라.
-    public static Map<String, List<Dish>>  getGroupingMenu(List<Dish> dishes){
+    public static Map<String, List<Dish>> getGroupingMenu(List<Dish> dishes){
         return dishes.stream()
                 .collect(groupingBy(dish -> {  //collect(Collectors.groupingBy()) + (alt + enter)
                     if (dish.getCalories() <= 400) return "diet";
@@ -115,9 +124,9 @@ public class StreamBasic {
     }
 
     //가장 칼로리가 높은 메뉴를 찾아라
-    public static Dish getMaxCaloryDish (List<Dish> dishes) {
-        return null;
-
-
+    public static Dish getMaxCalorieDish (List<Dish> dishes) {
+        return dishes.stream()
+                .max(comparingInt(Dish::getCalories))  // Optional<Dish>
+                .orElse(null);  // Dish
     }
 }
