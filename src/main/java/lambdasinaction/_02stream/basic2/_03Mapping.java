@@ -17,10 +17,22 @@ public class _03Mapping {
                 .collect(toList())  // List<String>
                 .forEach(System.out::println);
 
-        // 2. IntStream의 sum() 사용한 칼로리 합계
+        // 2-1. IntStream의 sum() 사용한 칼로리 합계
         int sum = Dish.menu.stream()
                 .mapToInt(Dish::getCalories)  // IntStream
                 .sum();
+        System.out.println("sum = " + sum);
+
+        // 2-2. Stream의 reduce() 사용한 칼로리 합계
+        sum = Dish.menu.stream()
+                .map(Dish::getCalories)
+                .reduce((prev, curr) -> prev + curr)
+                .orElse(0);
+        System.out.println("sum = " + sum);
+        
+        sum = Dish.menu.stream()
+                .map(Dish::getCalories)
+                .reduce(0, (prev, curr) -> prev + curr);
         System.out.println("sum = " + sum);
 
         // map
