@@ -1,11 +1,22 @@
 package lambdasinaction._02stream.basic2;
 
-import java.util.*;
-import static java.util.Comparator.comparing;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 public class _03Sorting {
 
     public static void main(String...args){
+        List<Integer> integerList = List.of(10, 8, 3, 38, 40, 1);
+        integerList.stream()
+                .sorted((i1, i2) -> i1.compareTo(i2)).forEach(System.out::println);
+
+        System.out.println("---- Method Reference");
+        // Method Reference
+        integerList.stream()
+                .sorted(Integer::compareTo)
+                .forEach(System.out::println);
 
         // 1. static inner class 
         List<Apple> inventory = new ArrayList<>();
