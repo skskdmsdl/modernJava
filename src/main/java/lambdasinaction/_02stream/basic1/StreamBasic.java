@@ -1,7 +1,8 @@
 package lambdasinaction._02stream.basic1;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class StreamBasic {
 
@@ -13,7 +14,7 @@ public class StreamBasic {
 
         // Java 8
         getLowCaloricDishesNamesInJava8(Dish.menu).forEach(System.out::println);
-
+        getLowCaloricDishesNamesInJava8MethodRef(Dish.menu).forEach(System.out::println);
     }
 
     public static List<String> getLowCaloricDishesNamesInJava7(List<Dish> dishes){
@@ -47,7 +48,19 @@ public class StreamBasic {
                 .sorted(Comparator.comparing(dish -> dish.getCalories()))  // stream<Dish>
                 // map()의 아규먼트 Function<? super T, ? extends R>
                 .map(dish -> dish.getName())  // stream<String>
-                .collect(Collectors.toList())
+                .collect(toList())
+                .subList(0, 3); // List<String>
+    }
+
+    public static List<String> getLowCaloricDishesNamesInJava8MethodRef(List<Dish> dishes){
+        return dishes.stream()
+                .filter(dish -> dish.getCalories() <= 400)  // stream<Dish>
+                // comparing의 아규먼트 Function<? super T, ? extends U>
+                .sorted(Comparator.comparing(Dish::getCalories))  // stream<Dish>
+                // map()의 아규먼트 Function<? super T, ? extends R>
+                .map(Dish::getName)  // stream<String>
+                // alt + enter해서 static method import 해주면 더 간결해짐(Collectors.toList())
+                .collect(toList())
                 .subList(0, 3); // List<String>
     }
 
