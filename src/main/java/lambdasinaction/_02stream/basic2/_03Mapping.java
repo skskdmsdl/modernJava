@@ -11,7 +11,7 @@ public class _03Mapping {
 
     public static void main(String...args){
 
-        //1. map - Dish의 name 목록만
+        // 1. map - Dish의 name 목록만
         Dish.menu.stream()  // Stream<Dish>
                 .map(Dish::getName)  //Stream<String>
                 .collect(toList())  // List<String>
@@ -42,13 +42,30 @@ public class _03Mapping {
                                          .collect(toList());
         System.out.println(wordLengths);
 
-        //2. map - 중복된 문자 제거한 word 리스트
+        // 2. map - 중복된 문자 제거한 word 리스트
+        List<String> stringList = List.of("Hello", "World");
+        stringList.stream()
+                .map(word -> word.split(""))
+                .distinct()
+                .collect(toList())
+                .forEach(System.out::println);
 
+        System.out.println("---- flatMap() 시작");
+        // 3. map(), flatMap() - 중복된 문자 제거한 word 리스트
+        stringList.stream()
+                .map(word -> word.split(""))
+                // Arrays.stream() -> Stream<T> stream(T[] array)
+                .flatMap(wordArray -> Arrays.stream(wordArray))  // Stream<String>
+                .distinct()
+                .collect(toList())
+                .forEach(System.out::println);
 
-        //3.flatMap - 중복된 문자 제거가 word 리스트
-
-
-
+        stringList.stream()
+                .flatMap(word -> Arrays.stream(word.split("")))
+                .distinct()
+                .collect(toList())
+                .forEach(System.out::println);
+        System.out.println("---- flatMap() 끝");
 
         // flatMap
         List<Integer> numbers1 = Arrays.asList(1,2,3,4,5);
