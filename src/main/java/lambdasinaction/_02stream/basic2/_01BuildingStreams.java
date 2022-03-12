@@ -19,12 +19,13 @@ public class _01BuildingStreams {
 
         // Arrays._02stream
         int[] numbers = {2, 3, 5, 7, 11, 13};
-        System.out.println(Arrays.stream(numbers).sum());
+        System.out.println("sum() = " + Arrays.stream(numbers).sum());
 
         // Stream.iterate
         Stream.iterate(0, n -> n + 2)
               .limit(10)
-              .forEach(System.out::println);
+              .forEach(System.out::print);
+        System.out.println();
 
         // fibonnaci with iterate
         Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1],t[0] + t[1]})
@@ -36,6 +37,7 @@ public class _01BuildingStreams {
               . map(t -> t[0])  
               .forEach(System.out::println);
 
+        System.out.println("Stream.generate => ");
         // random _02stream of doubles with Stream.generate
         Stream.generate(Math::random)
               .limit(10)
