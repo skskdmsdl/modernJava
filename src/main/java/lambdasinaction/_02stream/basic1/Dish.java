@@ -33,9 +33,18 @@ public class Dish {
 
     public enum Type { MEAT, FISH, OTHER }
 
+//    @Override
+//    public String toString() {
+//        return name;
+//    }
+
+    // alt + Insert -> toString()
     @Override
     public String toString() {
-        return name;
+        return "Dish{" +
+                "name='" + name + '\'' +
+                ", calories=" + calories +
+                '}';
     }
 
     public static final List<Dish> menu =

@@ -32,8 +32,13 @@ public class _02Filtering {
                         .collect(toList());
         dishesLimit3.forEach(System.out::println);
 
+        System.out.println("---- Skip");
         //4. Skipping elements
-        //List<Dish> dishesSkip2 =
+        List<Dish> dishesSkip2 =
+                Dish.menu.stream()
+                        .skip(2)
+                        .collect(toList());
+        dishesSkip2.forEach(System.out::println);
 
 
 
