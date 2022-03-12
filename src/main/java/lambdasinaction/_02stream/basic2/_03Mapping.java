@@ -1,18 +1,27 @@
 package lambdasinaction._02stream.basic2;
 
-import lambdasinaction._02stream.basic1.*;
+import lambdasinaction._02stream.basic1.Dish;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+
 import static java.util.stream.Collectors.toList;
-import static lambdasinaction._02stream.basic1.Dish.menu;
 
 public class _03Mapping {
 
     public static void main(String...args){
 
         //1. map - Dish의 name 목록만
+        Dish.menu.stream()  // Stream<Dish>
+                .map(Dish::getName)  //Stream<String>
+                .collect(toList())  // List<String>
+                .forEach(System.out::println);
 
-
+        // 2. IntStream의 sum() 사용한 칼로리 합계
+        int sum = Dish.menu.stream()
+                .mapToInt(Dish::getCalories)  // IntStream
+                .sum();
+        System.out.println("sum = " + sum);
 
         // map
         List<String> words = Arrays.asList("Hello", "World");
