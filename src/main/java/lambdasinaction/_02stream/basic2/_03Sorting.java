@@ -9,6 +9,18 @@ public class _03Sorting {
 
     public static void main(String...args){
         List<Integer> integerList = List.of(10, 8, 3, 38, 40, 1);
+        System.out.println("---- Anonymous Inner Class");
+        // Anonymous Inner Class
+        integerList.stream()
+                        .sorted(new Comparator<Integer>() {
+                            @Override
+                            public int compare(Integer o1, Integer o2) {
+                                return o1.compareTo(o2);
+                            }
+                        }).forEach(System.out::println);
+
+        System.out.println("---- Lambda Expression");
+        // Lambda Expression
         integerList.stream()
                 .sorted((i1, i2) -> i1.compareTo(i2)).forEach(System.out::println);
 
