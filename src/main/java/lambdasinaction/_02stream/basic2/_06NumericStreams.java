@@ -44,6 +44,9 @@ public class _06NumericStreams {
 
         System.out.println(evenNumbers.count());
 
+        IntSummaryStatistics statistics = IntStream.rangeClosed(1, 100).summaryStatistics();
+        System.out.println("statistics = " + statistics);
+
         Stream<int[]> pythagoreanTriples =
                IntStream.rangeClosed(1, 100).boxed()
                         .flatMap(a -> IntStream.rangeClosed(a, 100)
