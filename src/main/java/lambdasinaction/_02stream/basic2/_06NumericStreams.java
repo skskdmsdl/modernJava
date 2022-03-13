@@ -34,6 +34,10 @@ public class _06NumericStreams {
         }
         System.out.println(max);
 
+        // Optional의 orElseGet의 아규먼트는 Supplier -> T get()
+        int maxValue = menu.stream().mapToInt(Dish::getCalories).max().orElseGet(() -> 1);
+        System.out.println("maxValue = " + maxValue);
+
         // numeric ranges
         IntStream evenNumbers = IntStream.rangeClosed(1, 100)
                                  .filter(n -> n % 2 == 0);
