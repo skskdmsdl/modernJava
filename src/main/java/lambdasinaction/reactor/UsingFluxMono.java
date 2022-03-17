@@ -1,11 +1,10 @@
 package lambdasinaction.reactor;
 
+// spring boot 에서는 사용 가능하나 spring project에서는 flux를 가져올 수 없음
 // https://projectreactor.io/docs/core/release/reference/
 public class UsingFluxMono {
     public static void main(String[] args) {
         // Flux  생성
-        // spring boot 에서는 사용 가능하나 spring project에서는 가져올 수 없음
-
        /* @Test
         public void justFlux() {
             Flux<String> stringFlux = Flux.just("Hello", "WebFlux").log();
